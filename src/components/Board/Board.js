@@ -19,7 +19,7 @@ class Board extends Component {
 
   shuffle(array) {
       for (let i = 0; i < array.length - 1; i++) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(Math.random() * (array.length));
         [array[i], array[j]] = [array[j], array[i]];
       }
   }
