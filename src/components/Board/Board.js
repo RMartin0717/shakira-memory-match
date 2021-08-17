@@ -10,7 +10,7 @@ import shakiraSix from "../../assets/shakira6.jpeg"
 
 
 const Board = () => {
-  const [cards, setCards] = useState([
+  const [cards] = useState([
     {id: 1, image: shakiraOne, alt: "one"},
     {id: 1, image: shakiraOne, alt: "one"},
     {id: 2, image: shakiraTwo, alt: "two"},
@@ -32,7 +32,7 @@ const Board = () => {
   }, [cards])
 
   const handleClick = (event) => {
-    shuffle(cards)
+    window.location.reload()
   }
 
   const shuffle = (array) => {
