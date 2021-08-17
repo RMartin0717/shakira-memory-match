@@ -50,11 +50,12 @@ const Board = () => {
     if (!currentCard) {
       setCurrentCard(card)
     }
+    if (currentCard === card) {
+      return
+    }
     if (currentCard !== card && currentCard.num === card.num) {
       setMatchCount(matchCount + 1)
       setCurrentCard('')
-    } else {
-      return
     }
   }
 
