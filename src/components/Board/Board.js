@@ -24,8 +24,10 @@ const Board = () => {
     {id: 6, image: shakiraSix, alt: "six"},
     {id: 6, image: shakiraSix, alt: "six"}
   ])
-  const [shuffledCards, setShuffledCards] = useState([])
   //refactor this to start with one of each image, then use spread operator to double the array?
+  const [shuffledCards, setShuffledCards] = useState([])
+  const [currentCard, setCurrentCard] = useState([])
+
 
   useEffect(() => {
     shuffle(cards)
@@ -52,6 +54,7 @@ const Board = () => {
         id = {card.id}
         image = {card.image}
         alt = {card.alt}
+        selectCard = {() => setCurrentCard(card)}
         />
       )
     })
