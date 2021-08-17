@@ -26,8 +26,8 @@ const Board = () => {
   ])
   //refactor this to start with one of each image, then use spread operator to double the array?
   const [shuffledCards, setShuffledCards] = useState([])
+  const [matchedCards, setMatchedCards] = useState([])
   const [currentCard, setCurrentCard] = useState('')
-  const [matchCount, setMatchCount] = useState(0)
   const [win, setWin] = useState(false)
 
   useEffect(() => {
@@ -48,17 +48,17 @@ const Board = () => {
   }
 
   const checkCard = (card) => {
-    if (!currentCard) {
+    if (!currentCard && !matchedCards.includes(card)) {
       setCurrentCard(card)
     }
     if (currentCard === card) {
       return
     }
-    if (currentCard !== card && currentCard.num === card.num && matchCount < 5) {
-      setMatchCount(matchCount + 1)
+    if (currentCard !== card && currentCard.num === card.num && matchedCards.length < cards.length) {
+      setMatchedCards([...matchedCards, currentCard, card])
       setCurrentCard('')
     }
-    if (currentCard !== card && currentCard.num === card.num && matchCount >= 5) {
+    if (currentCard !== card && currentCard.num === card.num && matchedCards.length >= cards.length - 2) {
       setWin(true)
     }
     if (currentCard && currentCard !== card && currentCard.num !== card.num) {
