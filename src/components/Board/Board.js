@@ -76,7 +76,7 @@ const Board = () => {
         num = {card.num}
         image = {card.image}
         alt = {card.alt}
-        selectCard = {() => checkCard(card)}
+        checkCard = {() => checkCard(card)}
         />
       )
     })

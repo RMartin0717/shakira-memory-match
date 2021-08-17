@@ -1,9 +1,9 @@
 import React from "react"
 import "./Card.css"
 
-const Card = ({id, num, selectCard, image, alt}) => {
+const Card = ({id, num, checkCard, image, alt}) => {
   return (
-    <article className="shakira-card" id={id} num={num} onClick={selectCard}>
+    <article className="shakira-card" id={id} num={num} onClick={checkCard}>
       <img src={image} alt={alt} className="shakira-image hidden"/>
     </article>
   )
