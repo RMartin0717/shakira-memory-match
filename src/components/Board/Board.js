@@ -11,21 +11,24 @@ import shakiraSix from "../../assets/shakira6.jpeg"
 
 const Board = () => {
   const [cards] = useState([
-    {id: 1, image: shakiraOne, alt: "one"},
-    {id: 1, image: shakiraOne, alt: "one"},
-    {id: 2, image: shakiraTwo, alt: "two"},
-    {id: 2, image: shakiraTwo, alt: "two"},
-    {id: 3, image: shakiraThree, alt: "three"},
-    {id: 3, image: shakiraThree, alt: "three"},
-    {id: 4, image: shakiraFour, alt: "four"},
-    {id: 4, image: shakiraFour, alt: "four"},
-    {id: 5, image: shakiraFive, alt: "five"},
-    {id: 5, image: shakiraFive, alt: "five"},
-    {id: 6, image: shakiraSix, alt: "six"},
-    {id: 6, image: shakiraSix, alt: "six"}
+    {id: 1, num: "one", image: shakiraOne, alt: "one"},
+    {id: 2, num: "one", image: shakiraOne, alt: "one"},
+    {id: 3, num: "two", image: shakiraTwo, alt: "two"},
+    {id: 4, num: "two", image: shakiraTwo, alt: "two"},
+    {id: 5, num: "three", image: shakiraThree, alt: "three"},
+    {id: 6, num: "three", image: shakiraThree, alt: "three"},
+    {id: 7 , num: "four", image: shakiraFour, alt: "four"},
+    {id: 8, num: "four", image: shakiraFour, alt: "four"},
+    {id: 9, num: "five", image: shakiraFive, alt: "five"},
+    {id: 10, num: "five", image: shakiraFive, alt: "five"},
+    {id: 11, num: "six", image: shakiraSix, alt: "six"},
+    {id: 12, num: "six", image: shakiraSix, alt: "six"}
   ])
-  const [shuffledCards, setShuffledCards] = useState([])
   //refactor this to start with one of each image, then use spread operator to double the array?
+  const [shuffledCards, setShuffledCards] = useState([])
+  const [matchedCards, setMatchedCards] = useState([])
+  const [currentCard, setCurrentCard] = useState('')
+  const [win, setWin] = useState(false)
 
   useEffect(() => {
     shuffle(cards)
@@ -44,14 +47,36 @@ const Board = () => {
     setShuffledCards(array)
   }
 
+  const checkCard = (card) => {
+    if (!currentCard && !matchedCards.includes(card)) {
+      setCurrentCard(card)
+    }
+    if (currentCard === card) {
+      return
+    }
+    if (currentCard !== card && currentCard.num === card.num && matchedCards.length < cards.length) {
+      setMatchedCards([...matchedCards, currentCard, card])
+      setCurrentCard('')
+    }
+    if (currentCard !== card && currentCard.num === card.num && matchedCards.length >= cards.length - 2) {
+      setWin(true)
+    }
+    if (currentCard && currentCard !== card && currentCard.num !== card.num) {
+      setCurrentCard('')
+    }
+  }
+
+
   const allCards = (data) => {
     const makeCards = shuffledCards.map((card, index) => {
       return (
         <Card
         key = {index}
         id = {card.id}
+        num = {card.num}
         image = {card.image}
         alt = {card.alt}
+        selectCard = {() => checkCard(card)}
         />
       )
     })
@@ -60,6 +85,9 @@ const Board = () => {
 
   return (
     <>
+      {win &&
+      <h3>Winner!</h3>
+      }
       <section>{allCards(cards)}</section>
       <button onClick={(event) => handleClick(event)}>New Game</button>
     </>
