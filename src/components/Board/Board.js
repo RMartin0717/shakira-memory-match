@@ -28,6 +28,7 @@ const Board = () => {
   const [shuffledCards, setShuffledCards] = useState([])
   const [currentCard, setCurrentCard] = useState('')
   const [matchCount, setMatchCount] = useState(0)
+  const [win, setWin] = useState(false)
 
   useEffect(() => {
     shuffle(cards)
@@ -53,14 +54,18 @@ const Board = () => {
     if (currentCard === card) {
       return
     }
-    if (currentCard !== card && currentCard.num === card.num) {
+    if (currentCard !== card && currentCard.num === card.num && matchCount < 5) {
       setMatchCount(matchCount + 1)
       setCurrentCard('')
+    }
+    if (currentCard !== card && currentCard.num === card.num && matchCount >= 5) {
+      setWin(true)
     }
     if (currentCard && currentCard !== card && currentCard.num !== card.num) {
       setCurrentCard('')
     }
   }
+
 
   const allCards = (data) => {
     const makeCards = shuffledCards.map((card, index) => {
@@ -80,6 +85,9 @@ const Board = () => {
 
   return (
     <>
+      {win &&
+      <h3>Winner!</h3>
+      }
       <section>{allCards(cards)}</section>
       <button onClick={(event) => handleClick(event)}>New Game</button>
     </>
