@@ -57,6 +57,9 @@ const Board = () => {
       setMatchCount(matchCount + 1)
       setCurrentCard('')
     }
+    if (currentCard && currentCard !== card && currentCard.num !== card.num) {
+      setCurrentCard('')
+    }
   }
 
   const allCards = (data) => {
