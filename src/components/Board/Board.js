@@ -11,18 +11,18 @@ import shakiraSix from "../../assets/shakira6.jpeg"
 
 const Board = () => {
   const [cards, setCards] = useState([
-    {id: 1, image: shakiraOne},
-    {id: 1, image: shakiraOne},
-    {id: 2, image: shakiraTwo},
-    {id: 2, image: shakiraTwo},
-    {id: 3, image: shakiraThree},
-    {id: 3, image: shakiraThree},
-    {id: 4, image: shakiraFour},
-    {id: 4, image: shakiraFour},
-    {id: 5, image: shakiraFive},
-    {id: 5, image: shakiraFive},
-    {id: 6, image: shakiraSix},
-    {id: 6, image: shakiraSix}
+    {id: 1, image: shakiraOne, alt: "one"},
+    {id: 1, image: shakiraOne, alt: "one"},
+    {id: 2, image: shakiraTwo, alt: "two"},
+    {id: 2, image: shakiraTwo, alt: "two"},
+    {id: 3, image: shakiraThree, alt: "three"},
+    {id: 3, image: shakiraThree, alt: "three"},
+    {id: 4, image: shakiraFour, alt: "four"},
+    {id: 4, image: shakiraFour, alt: "four"},
+    {id: 5, image: shakiraFive, alt: "five"},
+    {id: 5, image: shakiraFive, alt: "five"},
+    {id: 6, image: shakiraSix, alt: "six"},
+    {id: 6, image: shakiraSix, alt: "six"}
   ])
   //refactor this to start with one of each image, then use spread operator to double the array?
 
@@ -51,6 +51,7 @@ const Board = () => {
         key = {index}
         id = {card.id}
         image = {card.image}
+        alt = {card.alt}
         />
       )
     })
