@@ -24,10 +24,11 @@ const Board = () => {
     {id: 6, image: shakiraSix, alt: "six"},
     {id: 6, image: shakiraSix, alt: "six"}
   ])
+  const [shuffledCards, setShuffledCards] = useState([])
   //refactor this to start with one of each image, then use spread operator to double the array?
 
   useEffect(() => {
-    console.log(cards)
+    shuffle(cards)
   }, [cards])
 
   const handleClick = (event) => {
@@ -40,12 +41,12 @@ const Board = () => {
       [array[i], array[j]] = [array[j], array[i]];
       //instead of mutating the array, try a forEach and create a new array
     }
-    console.log(array, "array")
-    setCards(array)
+    console.log(array)
+    setShuffledCards(array)
   }
 
-  const allCards = (cards) => {
-    const makeCards = cards.map((card, index) => {
+  const allCards = (data) => {
+    const makeCards = shuffledCards.map((card, index) => {
       return (
         <Card
         key = {index}
