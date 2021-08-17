@@ -41,7 +41,6 @@ const Board = () => {
       [array[i], array[j]] = [array[j], array[i]];
       //instead of mutating the array, try a forEach and create a new array
     }
-    console.log(array)
     setShuffledCards(array)
   }
 
