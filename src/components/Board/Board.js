@@ -28,24 +28,27 @@ const Board = () => {
 
   useEffect(() => {
     console.log(cards)
-    const shuffledCards = shuffle(cards)
-    console.log(shuffledCards)
-    setCards(shuffledCards)
-  })
+  }, [cards])
+
+  const handleClick = (event) => {
+    shuffle(cards)
+  }
 
   const shuffle = (array) => {
     for (let i = 0; i < array.length - 1; i++) {
       const j = Math.floor(Math.random() * (array.length));
       [array[i], array[j]] = [array[j], array[i]];
+      //instead of mutating the array, try a forEach and create a new array
     }
-    return array
+    console.log(array, "array")
+    setCards(array)
   }
 
-  const allCards = () => {
-    const makeCards = cards.map(card => {
+  const allCards = (cards) => {
+    const makeCards = cards.map((card, index) => {
       return (
         <Card
-        key = {card.id}
+        key = {index}
         id = {card.id}
         image = {card.image}
         />
@@ -56,8 +59,8 @@ const Board = () => {
 
   return (
     <>
-      <section>{allCards}</section>
-      <button onClick={shuffle}>New Game</button>
+      <section>{allCards(cards)}</section>
+      <button onClick={(event) => handleClick(event)}>New Game</button>
     </>
   )
 }
